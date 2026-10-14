@@ -2,6 +2,8 @@
 
 배경과 근거는 [../SENSENOVA_8STEP_LORA_NOTES.md](../SENSENOVA_8STEP_LORA_NOTES.md)를 보세요.
 
+> **결과 (2026-10-14)**: A/B 학습을 마쳤고 **B를 채택**했습니다. A는 8-step 출력이 흐릿하고 반투명해졌습니다. 자세한 내용은 노트의 "결과 요약"을 보세요. 이미지 생성은 루트의 [`inference.py`](../inference.py)로 합니다.
+
 | 변형 | 학습 | 추론과 샘플 |
 |---|---|---|
 | **A** | 베이스 + 8-step V2(fused, 고정) 위에서 화풍 LoRA 학습 | 베이스 + 8-step V2 + A, 8 steps / cfg 1 |
@@ -137,6 +139,7 @@ bash /root/source/test_SenseNova-U1.5/sn15_train/tmux_start.sh ab
 A와 B를 그 기준으로 나란히 비교하세요.
 
 ## 사용 (최종 선택 후)
+루트의 [`inference.py`](../inference.py)를 쓰세요. `PROMPT`와 `STEP8` 등을 파일 맨 위에서 바꿀 수 있습니다. 내부적으로는 아래와 같이 동작합니다.
 ```python
 pipe.load_lora(pipe.dit, ".../SenseNova-U1.5-8B-MoT-LoRA-8step-V2.safetensors")
 pipe.load_lora(pipe.dit, ".../sn15_style_A/step-XXXX.safetensors", alpha=1.0)
